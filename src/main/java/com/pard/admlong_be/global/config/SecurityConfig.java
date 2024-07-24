@@ -1,4 +1,4 @@
-package com.pard.admlong_be.global;
+package com.pard.admlong_be.global.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

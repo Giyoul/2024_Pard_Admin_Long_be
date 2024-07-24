@@ -1,4 +1,4 @@
-package com.pard.admlong_be.global;
+package com.pard.admlong_be.global.config;
 
 import org.springframework.boot.web.servlet.view.MustacheViewResolver;
 import org.springframework.context.annotation.Configuration;

@@ -1,9 +1,7 @@
-package com.pard.admlong_be.global;
+package com.pard.admlong_be.global.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.servers.Server;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,8 +16,8 @@ public class SwaggerConfig {
         return new OpenAPI()
 //                .addServersItem(new Server().url(domain))
                 .info(new Info()
-                        .title("파드 지옥의 5차과제")
+                        .title("프로젝트 이름")
                         .description("설명")
-                        .version("1.0.0"));
+                        .version("0.9.0"));
     }
 }

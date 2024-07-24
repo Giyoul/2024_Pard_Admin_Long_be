@@ -1,4 +1,4 @@
-package com.pard.admlong_be.global;
+package com.pard.admlong_be.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

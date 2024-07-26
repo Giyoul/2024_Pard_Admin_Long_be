@@ -1,5 +1,6 @@
 package com.pard.admlong_be.global.config;
 
+import com.pard.admlong_be.global.responses.error.handler.AccessDeniedHandlerImpl;
 import com.pard.admlong_be.global.responses.error.handler.JwtAuthenticationEntryPoint;
 import com.pard.admlong_be.global.security.cookie.service.CookieService;
 import com.pard.admlong_be.global.security.jwt.JWTFilter;
@@ -15,7 +16,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandlerImpl;
+
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -72,13 +73,13 @@ public class SecurityConfig {
                 .addFilterBefore(new JWTFilter(jwtUtil, cookieService), UsernamePasswordAuthenticationFilter.class);
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/test","/swagger-ui/**","/v3/api-docs/**","/v1/users/login","/error").permitAll()
+                        .requestMatchers("/test","/swagger-ui/**","/v3/api-docs/**","/api/user/login","/error", "/api/health").permitAll()
                         .requestMatchers(HttpMethod.POST,"/v1/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/v1/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PATCH,"/v1/**").hasRole("ADMIN")
-                        .requestMatchers("/v1/**").hasRole("YB")
-                        .requestMatchers("/hi/hi").hasRole("OB")
-                        .requestMatchers("/hi/hello").hasRole("YB")
+//                        .requestMatchers("/v1/**").hasRole("YB")
+//                        .requestMatchers("/hi/hi").hasRole("OB")
+//                        .requestMatchers("/hi/hello").hasRole("YB")
                         .anyRequest().authenticated()
                 );
         http

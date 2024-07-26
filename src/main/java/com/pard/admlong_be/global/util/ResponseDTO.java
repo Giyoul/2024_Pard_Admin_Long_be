@@ -9,6 +9,7 @@ public class ResponseDTO {
     private boolean success;
     private String message;
     private Object response_object;
+    private String error_code;
 
 
     public ResponseDTO(boolean success, String message) {

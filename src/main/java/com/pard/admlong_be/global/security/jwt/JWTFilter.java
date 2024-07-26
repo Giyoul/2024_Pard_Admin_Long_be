@@ -49,7 +49,6 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         String token = authorization.get();
-        System.err.println("여기까진 왔음");
         try {
             if (jwtUtil.getExpired(token)) {
                 throw new ExpiredJwtException(null, null, "Token expired");
@@ -73,7 +72,6 @@ public class JWTFilter extends OncePerRequestFilter {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "JWT token is expired");
             return;
         }
-        System.err.println("여기까진 왔음");
         filterChain.doFilter(request, response);
     }
 

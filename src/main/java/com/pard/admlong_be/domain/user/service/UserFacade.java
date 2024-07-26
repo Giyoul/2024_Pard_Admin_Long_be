@@ -19,20 +19,18 @@ public class UserFacade {
 
     public ResponseDTO login(UserRequestDTO.Login dto, HttpServletResponse response) {
         try {
-            System.err.println("일단 여기까지는 왔나?0");
             String email = dto.getEmail();
             User user = userService.login(email);
-            System.err.println("일단 여기까지는 왔나?1");
             //JWT 토큰 생성 로직
             String token = jWTUtil.createJwt(user.getName(), user.getEmail());
-            System.err.println("일단 여기까지는 왔나?2");
             response.addCookie(cookieService.createCookie("Authorization", token));
-            System.err.println("일단 여기까지는 왔나?3");
             return new ResponseDTO(true, "토큰 생성 성공!", token);
-        } catch (ProjectException e) {
+        } catch (ProjectException.UserNotFoundException e) {
+            return new ResponseDTO(false, e.getErrorCode());
+        } catch (ProjectException.UserFacadeException e) {
             return new ResponseDTO(false, e.getMessage());
         } catch (Exception e) {
-            return new ResponseDTO(false, "로그인 과정에서 UserFacade단에 처리되지 않은 문제가 발생했습니다.");
+            return new ResponseDTO(false, "로그인 과정에서 UserFacade단에 처리되지 않은 문제가 발생했습니다.", e);
         }
     }
 }

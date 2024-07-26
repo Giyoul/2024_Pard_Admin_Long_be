@@ -34,7 +34,6 @@ public class JWTFilter extends OncePerRequestFilter {
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
             filterChain.doFilter(request, response);
-            System.err.println("쿠키 생성과정 문제 발생");
             return;
         }
 

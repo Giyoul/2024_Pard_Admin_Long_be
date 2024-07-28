@@ -27,4 +27,6 @@ public class UserController {
 //        ResponseDTO responseDTO = userFacade.login(request, response);
 //        return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
 //    }
+
+    // 위 코드는 로그인이지 회원가입이 아님. 회원가입은 따로 구현해줘야 하는 것이 맞음
 }

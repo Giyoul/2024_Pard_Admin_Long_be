@@ -469,65 +469,65 @@
 [//]: # ()
 [//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)
 
-[//]: # ()
-[//]: # (## Commit Message Convention)
 
-[//]: # ()
-[//]: # (- By default, create a commit using the icon in https://gitmoji.dev/.)
+## Commit Message Convention
 
-[//]: # ()
-[//]: # (```)
 
-[//]: # ( < form >)
+- By default, create a commit using the icon in https://gitmoji.dev/.
 
-[//]: # ({한다} {무엇을} {어떻게})
 
-[//]: # ({세부 내용 설명})
+```
 
-[//]: # ()
-[//]: # ( < ex >)
+ < form >
 
-[//]: # (:sparkles: Add login pages)
+{한다} {무엇을} {어떻게}
 
-[//]: # (:bug: Fix CORS Error)
+{세부 내용 설명}
 
-[//]: # (```)
 
-[//]: # (```)
+ < ex >
 
-[//]: # (🚀 - Deploy stuff `:rocket:`)
+:sparkles: Add login pages
 
-[//]: # ()
-[//]: # (⚡ - Improve performance `:zap:`)
+:bug: Fix CORS Error
 
-[//]: # ()
-[//]: # (🔥 - Remove code or files `:fire:`)
+```
 
-[//]: # ()
-[//]: # (🐛 - Fix a bug `:bug:`)
+```
 
-[//]: # ()
-[//]: # (✨ - Introduce new features `:sparkles:`)
+🚀 - Deploy stuff `:rocket:`
 
-[//]: # ()
-[//]: # (✅ - Add, Update `:white_check_mark:`)
 
-[//]: # ()
-[//]: # (📝 - Add or update documentation `:memo:`)
+⚡ - Improve performance `:zap:`
 
-[//]: # ()
-[//]: # (🙈 - Add or update ignore `:see_no_evil:`)
 
-[//]: # (```)
+🔥 - Remove code or files `:fire:`
+
+
+🐛 - Fix a bug `:bug:`
+
+
+✨ - Introduce new features `:sparkles:`
+
+
+✅ - Add, Update `:white_check_mark:`
+
+
+📝 - Add or update documentation `:memo:`
+
+
+🙈 - Add or update ignore `:see_no_evil:`
+
+```
 
 [//]: # ()
 [//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)
 
-[//]: # ()
-[//]: # (## Branch Criteria)
 
-[//]: # ()
-[//]: # (<img src="https://github.com/user-attachments/assets/399474e3-1c20-4bc2-85d9-7b4ea040bcf4">)
+## Branch Criteria
+
+
+<img src="https://github.com/user-attachments/assets/399474e3-1c20-4bc2-85d9-7b4ea040bcf4">
 
 [//]: # ()
 [//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)

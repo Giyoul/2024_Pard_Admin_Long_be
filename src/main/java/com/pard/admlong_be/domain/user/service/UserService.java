@@ -1,5 +1,6 @@
 package com.pard.admlong_be.domain.user.service;
 
+import com.pard.admlong_be.domain.challenge.dto.response.ChallengeResponseDTO;
 import com.pard.admlong_be.domain.user.dto.request.UserRequestDTO;
 import com.pard.admlong_be.domain.user.dto.response.UserResponseDTO;
 import com.pard.admlong_be.domain.user.entity.User;
@@ -12,6 +13,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -56,7 +61,10 @@ public class UserService {
                 throw new ProjectException.UserNotExistException("없는 유저입니다.");
             }
             User user = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(() -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."));
-            UserResponseDTO.GetUserResponseDTO response = new UserResponseDTO.GetUserResponseDTO(user);
+            List<ChallengeResponseDTO.GetChallengeResponse> userChallengeList = user.getChallengeList()
+                    .stream().map(ChallengeResponseDTO.GetChallengeResponse::new)
+                    .collect(Collectors.toList());
+            UserResponseDTO.GetUserResponseDTO response = new UserResponseDTO.GetUserResponseDTO(user, userChallengeList);
             return new ResponseDTO(true, "유저 정보 탐색 성공", response);
         } catch (ProjectException.UserNotFoundException e) {
             return new ResponseDTO(false, e.getMessage());

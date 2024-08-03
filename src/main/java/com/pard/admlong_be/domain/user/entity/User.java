@@ -1,23 +1,29 @@
 package com.pard.admlong_be.domain.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pard.admlong_be.domain.bloodDonation.entity.BloodDonation;
+import com.pard.admlong_be.domain.challenge.entity.Challenge;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID")
-    private Long id;
+    private Long user_id;
 
     private String name;
 
@@ -35,4 +41,16 @@ public class User {
     private String blood_type;
 
     private Date last_donation_date;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
+    @JsonIgnore // 순환 참조 방지
+    private List<Challenge> challengeList;
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
+//    @JsonIgnore // 순환 참조 방지
+//    private List<Challenge> likeChallengeList;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore // 순환 참조 방지
+    private List<BloodDonation> bloodDonationList;
 }

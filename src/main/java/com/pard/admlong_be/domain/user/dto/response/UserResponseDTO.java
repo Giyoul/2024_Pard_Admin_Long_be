@@ -1,6 +1,8 @@
 package com.pard.admlong_be.domain.user.dto.response;
 
+import com.pard.admlong_be.domain.challenge.dto.response.ChallengeResponseDTO;
 import com.pard.admlong_be.domain.user.entity.User;
+import com.pard.admlong_be.domain.user.service.UserService;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -50,15 +52,16 @@ public class UserResponseDTO {
         private Double height;
         private Double weight;
         private String blood_type;
-//        private List<>
+        private List<ChallengeResponseDTO.GetChallengeResponse> challenge_list;
 
-        public GetUserResponseDTO(User user) {
+        public GetUserResponseDTO(User user, List<ChallengeResponseDTO.GetChallengeResponse> userChallengeList) {
             this.name = user.getName();
             this.birthday = user.getBirthday();
             this.gender = user.getGender();
             this.height = user.getHeight();
             this.weight = user.getWeight();
             this.blood_type = user.getBlood_type();
+            this.challenge_list = userChallengeList;
         }
     }
 }

@@ -35,4 +35,19 @@ public class UserFacade {
             return new ResponseDTO(false, "로그인 과정에서 UserFacade단에 처리되지 않은 문제가 발생했습니다.", e);
         }
     }
+
+    public ResponseDTO register(UserRequestDTO.Register userRequestDTO, HttpServletResponse response) {
+        try {
+            User user = userService.register(userRequestDTO);
+            String token = jWTUtil.createJwt(user.getName(), user.getEmail());
+            response.addCookie(cookieService.createCookie("Authorization", token));
+            return new ResponseDTO(true, "회원가입 및, 토큰 생성 성공!", new UserResponseDTO.UserLoginResponseDTO(token));
+        } catch (ProjectException.InvalidValueException e) {
+            return new ResponseDTO(false, e.getMessage());
+        } catch (ProjectException.UserFacadeException e) {
+            return new ResponseDTO(false, e.getMessage());
+        } catch (Exception e) {
+            return new ResponseDTO(false, "회원가입 과정에서 UserFacade단에 처리되지 않은 문제가 발생했습니다.", e);
+        }
+    }
 }

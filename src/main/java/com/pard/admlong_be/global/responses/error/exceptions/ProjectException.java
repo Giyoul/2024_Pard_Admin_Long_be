@@ -26,4 +26,8 @@ public class ProjectException extends RuntimeException {
         }
     }
 
+    public static class InvalidValueException extends ProjectException {
+        public InvalidValueException(String errorMessage) {super(errorMessage);}
+    }
+
 }

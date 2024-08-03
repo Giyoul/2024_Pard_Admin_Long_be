@@ -73,7 +73,7 @@ public class SecurityConfig {
                 .addFilterBefore(new JWTFilter(jwtUtil, cookieService), UsernamePasswordAuthenticationFilter.class);
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/test","/swagger-ui/**","/v3/api-docs/**","/api/user/login","/error", "/api/health").permitAll()
+                        .requestMatchers("/test","/swagger-ui/**","/v3/api-docs/**","/api/login", "/api/register","/error", "/api/health").permitAll()
                         .requestMatchers(HttpMethod.POST,"/v1/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/v1/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PATCH,"/v1/**").hasRole("ADMIN")

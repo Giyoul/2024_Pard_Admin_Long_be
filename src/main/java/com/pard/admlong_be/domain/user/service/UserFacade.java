@@ -1,6 +1,7 @@
 package com.pard.admlong_be.domain.user.service;
 
 import com.pard.admlong_be.domain.user.dto.request.UserRequestDTO;
+import com.pard.admlong_be.domain.user.dto.response.UserResponseDTO;
 import com.pard.admlong_be.domain.user.entity.User;
 import com.pard.admlong_be.global.responses.error.exceptions.ProjectException;
 import com.pard.admlong_be.global.security.cookie.service.CookieService;
@@ -17,14 +18,15 @@ public class UserFacade {
     private final JWTUtil jWTUtil;
     private final CookieService cookieService;
 
-    public ResponseDTO login(UserRequestDTO.Login dto, HttpServletResponse response) {
+    public ResponseDTO login(String email, HttpServletResponse response) {
         try {
-            String email = dto.getEmail();
             User user = userService.login(email);
             //JWT 토큰 생성 로직
             String token = jWTUtil.createJwt(user.getName(), user.getEmail());
             response.addCookie(cookieService.createCookie("Authorization", token));
-            return new ResponseDTO(true, "토큰 생성 성공!", token);
+            return new ResponseDTO(true, "토큰 생성 성공!", new UserResponseDTO.UserLoginResponseDTO(token));
+        } catch (ProjectException.UserNotExistException e) {
+            return new ResponseDTO(true, e.getMessage(), new UserResponseDTO.UserLoginResponseDTO());
         } catch (ProjectException.UserNotFoundException e) {
             return new ResponseDTO(false, e.getErrorCode());
         } catch (ProjectException.UserFacadeException e) {

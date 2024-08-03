@@ -20,4 +20,21 @@ public class UserResponseDTO {
                     .build();
         }
     }
+
+    @Getter
+    @Setter
+    public static class UserLoginResponseDTO {
+        private boolean is_new_user;
+        private String token;
+
+        public UserLoginResponseDTO() {
+            this.is_new_user = true;
+            this.token = null;
+        }
+
+        public UserLoginResponseDTO(String token) {
+            this.is_new_user = false;
+            this.token = token;
+        }
+    }
 }

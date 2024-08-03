@@ -9,22 +9,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/user")
+@RequestMapping("/api")
 public class UserController {
     private final UserFacade userFacade;
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     @Operation(summary = "이메일을 입력하고 토큰을 받아옵니다.", description = "유저의 이메일을 입력하면, 해당 유저의 토큰을 발급해줍니다.")
-    public ResponseEntity<ResponseDTO> login(@RequestBody UserRequestDTO.Login request, HttpServletResponse response) {
-        ResponseDTO responseDTO = userFacade.login(request, response);
+    public ResponseEntity<ResponseDTO> login(@RequestParam String email, HttpServletResponse response) {
+        ResponseDTO responseDTO = userFacade.login(email, response);
         return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
     }
 }

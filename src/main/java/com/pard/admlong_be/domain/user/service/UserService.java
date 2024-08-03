@@ -20,7 +20,7 @@ public class UserService {
 
     public User login(String email) throws ProjectException.UserFacadeException {
         if (!userRepository.existsByEmail(email)) {
-            throw new ProjectException.UserNotFoundException("해당 이메일의 유저를 찾지 못했습니다.");
+            throw new ProjectException.UserNotExistException("회원가입 되어있지 않은 유저입니다.");
         }
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."));
         return user;

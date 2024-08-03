@@ -12,6 +12,10 @@ public class ProjectException extends RuntimeException {
         public UserNotFoundException(String errorMessage) {super(errorMessage);}
     }
 
+    public static class UserNotExistException extends ProjectException {
+        public UserNotExistException(String errorMessage) {super(errorMessage);}
+    }
+
 
     public static class UserFacadeException extends Exception {
         public UserFacadeException(String message) {

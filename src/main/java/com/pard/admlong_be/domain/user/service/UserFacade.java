@@ -3,6 +3,7 @@ package com.pard.admlong_be.domain.user.service;
 import com.pard.admlong_be.domain.user.dto.request.UserRequestDTO;
 import com.pard.admlong_be.domain.user.dto.response.UserResponseDTO;
 import com.pard.admlong_be.domain.user.entity.User;
+import com.pard.admlong_be.domain.user.repository.UserRepository;
 import com.pard.admlong_be.global.responses.error.exceptions.ProjectException;
 import com.pard.admlong_be.global.security.cookie.service.CookieService;
 import com.pard.admlong_be.global.security.jwt.JWTUtil;
@@ -17,6 +18,7 @@ public class UserFacade {
     private final UserService userService;
     private final JWTUtil jWTUtil;
     private final CookieService cookieService;
+    private final UserRepository userRepository;
 
     public ResponseDTO login(String email, HttpServletResponse response) {
         try {
@@ -38,6 +40,9 @@ public class UserFacade {
 
     public ResponseDTO register(UserRequestDTO.Register userRequestDTO, HttpServletResponse response) {
         try {
+            if (userRepository.existsByEmail(userRequestDTO.getEmail())) {
+                return new ResponseDTO(true, "이미 존재하는 사용자입니다.", new UserResponseDTO.UserLoginResponseDTO());
+            }
             User user = userService.register(userRequestDTO);
             String token = jWTUtil.createJwt(user.getName(), user.getEmail());
             response.addCookie(cookieService.createCookie("Authorization", token));

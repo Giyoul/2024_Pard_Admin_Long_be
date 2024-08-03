@@ -31,6 +31,7 @@ public class UserService {
 
     @Transactional
     public User register(UserRequestDTO.Register request) throws ProjectException.UserFacadeException {
+
         if(request.getGender() == 1 || request.getGender() == 0) {
             User user = User.builder()
                     .name(request.getName())

@@ -64,4 +64,14 @@ public class UserResponseDTO {
             this.challenge_list = userChallengeList;
         }
     }
+
+    @Getter
+    @Setter
+    public static class GetDueDateResponseDTO {
+        private long dueDate;
+
+        public GetDueDateResponseDTO(long dueDate) {
+            this.dueDate = dueDate;
+        }
+    }
 }

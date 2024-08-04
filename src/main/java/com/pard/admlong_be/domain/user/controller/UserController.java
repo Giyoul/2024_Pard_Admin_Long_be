@@ -42,4 +42,10 @@ public class UserController {
         return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
     }
 
+    @GetMapping("/user/duedate")
+    @Operation(summary = "쿠키 값을 보내주고, 해당 쿠키 유저의 헌혈가능일까지 남은 날짜를 가져옵니다.", description = "현재 이런 저런 이슈로, ")
+    public ResponseEntity<ResponseDTO> getDueDate(@CookieValue(value = "Authorization") String token) {
+        ResponseDTO responseDTO = userService.getDueDateByToken(token);
+        return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
+    }
 }

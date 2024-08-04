@@ -14,7 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,8 +72,37 @@ public class UserService {
             return new ResponseDTO(true, "유저 정보 탐색 성공", response);
         } catch (ProjectException.UserNotFoundException e) {
             return new ResponseDTO(false, e.getMessage());
+        } catch (ProjectException.UserNotExistException e) {
+            return new ResponseDTO(false, e.getMessage());
         } catch (Exception e) {
-            return new ResponseDTO(false, "유저 서칭 과정에서 token으로 검색 중 처리되지 않은 오류가 발생했습니다.", e);
+            return new ResponseDTO(false, "유저 서칭 과정에서 token으로 검색 중 처리되지 않은 오류가 발생했습니다.\n" + e.getMessage());
+        }
+    }
+
+    public ResponseDTO getDueDateByToken(String token) {
+        try {
+            if (!userRepository.existsByEmail(jwtUtil.getEmail(token))) {
+                throw new ProjectException.UserNotExistException("없는 유저입니다.");
+            }
+            Date lastDonationDate = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(()
+                    -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."))
+                    .getLast_donation_date();
+            // 현재 날짜 가져오기
+            LocalDate currentDate = LocalDate.now();
+            // java.util.Date를 java.time.LocalDate로 변환
+            LocalDate lastDonationLocalDate = lastDonationDate.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            // 두 날짜 간의 차이 계산
+            long daysBetween = ChronoUnit.DAYS.between(lastDonationLocalDate, currentDate);
+            // 이전 헌혈일로부터 지난 시간입니다.
+            return new ResponseDTO(true, "이전 헌혈 불러오는데 성공했습니다.", new UserResponseDTO.GetDueDateResponseDTO(daysBetween));
+        } catch (ProjectException.UserNotFoundException e) {
+            return new ResponseDTO(false, e.getMessage());
+        } catch (ProjectException.UserNotExistException e) {
+            return new ResponseDTO(false, e.getMessage());
+        } catch (Exception e) {
+            return new ResponseDTO(false, "유저 헌혈일 duedate 탐색 중 처리되지 않은 오류가 발생했습니다.\n" + e.getMessage());
         }
     }
 }

@@ -6,6 +6,8 @@ import com.pard.admlong_be.domain.user.service.UserFacade;
 import com.pard.admlong_be.domain.user.service.UserService;
 import com.pard.admlong_be.global.util.ResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,28 @@ public class UserController {
     public ResponseEntity<ResponseDTO> register(@RequestBody UserRequestDTO.Register request, HttpServletResponse response) {
         ResponseDTO responseDTO = userFacade.register(request, response);
         return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
+    }
+
+    @DeleteMapping("/cookie/delete")
+    public ResponseEntity<ResponseDTO> deleteCookie(HttpServletRequest request, HttpServletResponse response) {
+        // 요청에서 모든 쿠키를 가져옵니다.
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                // 삭제할 쿠키에 대해 새로운 쿠키 객체를 생성하고, 이름과 값을 그대로 유지합니다.
+                Cookie deleteCookie = new Cookie(cookie.getName(), null);
+                // 쿠키의 유효기간을 0으로 설정하여 삭제를 유도합니다.
+                deleteCookie.setMaxAge(0);
+                // 쿠키의 경로를 기존 쿠키의 경로와 일치시킵니다.
+                deleteCookie.setPath(cookie.getPath() != null ? cookie.getPath() : "/");
+
+                // 응답에 삭제할 쿠키를 추가합니다.
+                response.addCookie(deleteCookie);
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDTO(true, "토큰 삭제 성공"));
     }
 
     @GetMapping("/user")

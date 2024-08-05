@@ -17,8 +17,8 @@ public class ChallengeController {
 
     @PostMapping("/create")
     @Operation(summary = "입력한 정보의 챌린지를 생성합니다.", description = "보내준 정보의 챌린지를 생성합니다.")
-    public ResponseEntity<ResponseDTO> createChallenge(@RequestBody ChallengeRequestDTO.createChallengeRequestDTO request) {
-        ResponseDTO responseDTO = challengeService.createChallenge(request);
+    public ResponseEntity<ResponseDTO> createChallenge(@CookieValue(value = "Authorization") String token, @RequestBody ChallengeRequestDTO.createChallengeRequestDTO request) {
+        ResponseDTO responseDTO = challengeService.createChallenge(token, request);
         return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
     }
 
@@ -36,6 +36,10 @@ public class ChallengeController {
         return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
     }
 
-//    @PostMapping("join")
-//    @Operation(summary = "id로 챌린지 정보 불러오기", description = "path variable로 challenge id를 보내주면 해당 아이디의 챌린지 정보를 불러옵니다.")
+    @PostMapping("join")
+    @Operation(summary = "챌린지 참여하기", description = "토큰과 챌린지 id를 보내주면, 해당 챌린지 id의 챌린지에 사용자를 추가해줍니다.")
+    public ResponseEntity<ResponseDTO> joinChallengeById(@CookieValue(value = "Authorization") String token, @RequestParam Long challenge_id){
+        ResponseDTO responseDTO = challengeService.joinChallengeById(token, challenge_id);
+        return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
+    }
 }

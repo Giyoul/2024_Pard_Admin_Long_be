@@ -6,6 +6,13 @@ import com.pard.admlong_be.domain.challenge.entity.Challenge;
 import com.pard.admlong_be.domain.challenge.repository.ChallengeRepository;
 import com.pard.admlong_be.domain.challengelike.entity.ChallengeLike;
 import com.pard.admlong_be.domain.challengelike.repository.ChallengeLikeRepository;
+import com.pard.admlong_be.domain.user.entity.User;
+import com.pard.admlong_be.domain.user.repository.UserRepository;
+import com.pard.admlong_be.domain.user.service.UserService;
+import com.pard.admlong_be.domain.userChallengeRelation.entity.UserChallengeRelation;
+import com.pard.admlong_be.domain.userChallengeRelation.repository.UserChallengeRelationRepository;
+import com.pard.admlong_be.global.responses.error.exceptions.ProjectException;
+import com.pard.admlong_be.global.security.jwt.JWTUtil;
 import com.pard.admlong_be.global.util.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,17 +32,30 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class ChallengeService {
     private final ChallengeRepository challengeRepository;
     private final ChallengeLikeRepository challengeLikeRepository;
+    private final UserChallengeRelationRepository userChallengeRelationRepository;
+    private final UserRepository userRepository;
+    private final JWTUtil jwtUtil;
 
     @Transactional
-    public ResponseDTO createChallenge(ChallengeRequestDTO.createChallengeRequestDTO request) {
+    public ResponseDTO createChallenge(String token, ChallengeRequestDTO.createChallengeRequestDTO request) {
         try {
             Challenge challenge = new Challenge();
             ChallengeLike challengeLike = new ChallengeLike(challenge);
             Boolean challenge_finished = challengeFinished(request);
             challenge.createChallenge(request, challenge_finished);
+            if (!userRepository.existsByEmail(jwtUtil.getEmail(token))) {
+                throw new ProjectException.UserNotExistException("없는 유저입니다.");
+            }
+            User user = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(() -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."));
+            UserChallengeRelation userChallengeRelation = new UserChallengeRelation(user, challenge);
+            userChallengeRelationRepository.save(userChallengeRelation);
             challengeRepository.save(challenge);
             challengeLikeRepository.save(challengeLike);
-            return  new ResponseDTO(true, "Successfully created challenge");
+            return new ResponseDTO(true, "Successfully created challenge");
+        } catch (ProjectException.UserNotExistException e) {
+            return new ResponseDTO(false, e.getMessage());
+        } catch (ProjectException.UserNotFoundException e) {
+            return new ResponseDTO(false, e.getMessage());
         } catch (Exception e) {
             return new ResponseDTO(false, e.getMessage());
         }
@@ -101,6 +121,29 @@ public class ChallengeService {
             return new ResponseDTO(true, "Successfully retrieved challenge", new ChallengeResponseDTO.FindChallengeBdIdResponse(challenge.get()));
         } catch (Exception e) {
             return new ResponseDTO(false, e.getMessage());
+        }
+    }
+
+    @Transactional
+    public ResponseDTO joinChallengeById(String token, Long challenge_id) {
+        try {
+            if (!userRepository.existsByEmail(jwtUtil.getEmail(token))) {
+                throw new ProjectException.UserNotExistException("없는 유저입니다.");
+            }
+            User user = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(() -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."));
+            Optional<Challenge> challenge = challengeRepository.findById(challenge_id);
+            if (!challenge.isPresent()) {
+                throw new ProjectException.ChallengeNotExistException("없는 챌린지입니다.");
+            }
+            UserChallengeRelation userChallengeRelation = new UserChallengeRelation(user, challenge.get());
+            userChallengeRelationRepository.save(userChallengeRelation);
+            return new ResponseDTO(true, "Successfully joined challenge");
+        } catch (ProjectException.UserNotFoundException e) {
+            return new ResponseDTO(false, e.getMessage());
+        } catch (ProjectException.UserNotExistException e) {
+            return new ResponseDTO(false, e.getMessage());
+        } catch (Exception e) {
+            return new ResponseDTO(false, "챌린지 가입 과정 중 처리되지 않은 예외가 발생했습니다. -> " + e.getMessage());
         }
     }
 }

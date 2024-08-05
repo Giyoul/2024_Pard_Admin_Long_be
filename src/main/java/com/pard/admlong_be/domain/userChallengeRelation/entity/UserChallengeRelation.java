@@ -29,4 +29,9 @@ public class UserChallengeRelation {
     @JoinColumn(name = "challenge_id")
     @JsonIgnore // 순환참조 방지
     private Challenge challenge;
+
+    public UserChallengeRelation(User user, Challenge challenge) {
+        this.user = user;
+        this.challenge = challenge;
+    }
 }

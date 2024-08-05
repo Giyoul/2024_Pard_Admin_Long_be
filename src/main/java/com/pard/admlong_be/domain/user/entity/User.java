@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pard.admlong_be.domain.bloodDonation.entity.BloodDonation;
 import com.pard.admlong_be.domain.challenge.entity.Challenge;
 import com.pard.admlong_be.domain.challengelike.entity.ChallengeLike;
+import com.pard.admlong_be.domain.userChallengeRelation.entity.UserChallengeRelation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,22 +42,13 @@ public class User {
 
     private Date last_donation_date;
 
-    @ManyToOne
-    @JoinColumn(name = "challenge_id")
-    @JsonIgnore // 순환참조 방지
-    private Challenge challenge;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<ChallengeLike> likeList;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
-//    @JsonIgnore // 순환 참조 방지
-//    private List<Challenge> challengeList;
-
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
-//    @JsonIgnore // 순환 참조 방지
-//    private List<Challenge> likeChallengeList;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<UserChallengeRelation> userChallengeRelationList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore // 순환 참조 방지

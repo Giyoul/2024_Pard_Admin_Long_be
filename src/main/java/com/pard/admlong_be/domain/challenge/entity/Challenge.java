@@ -5,6 +5,7 @@ import com.pard.admlong_be.domain.bloodDonation.entity.BloodDonation;
 import com.pard.admlong_be.domain.challenge.dto.request.ChallengeRequestDTO;
 import com.pard.admlong_be.domain.challengelike.entity.ChallengeLike;
 import com.pard.admlong_be.domain.user.entity.User;
+import com.pard.admlong_be.domain.userChallengeRelation.entity.UserChallengeRelation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,16 +35,16 @@ public class Challenge {
     private Boolean challenge_finished;
 
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = false)
-    @JsonIgnore
-    private List<User> userList;
-
-    @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = false)
     @JsonIgnore // 순환 참조 방지
     private List<BloodDonation> bloodDonationList;
 
     @OneToOne(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private ChallengeLike challengeLike;
+
+    @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<UserChallengeRelation> userChallengeRelationList;
 
     public void createChallenge(ChallengeRequestDTO.createChallengeRequestDTO request, Boolean challenge_finished) {
         this.challenge_name = request.getChallenge_name();

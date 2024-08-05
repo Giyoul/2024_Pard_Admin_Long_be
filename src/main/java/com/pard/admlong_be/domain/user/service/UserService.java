@@ -6,6 +6,7 @@ import com.pard.admlong_be.domain.user.dto.request.UserRequestDTO;
 import com.pard.admlong_be.domain.user.dto.response.UserResponseDTO;
 import com.pard.admlong_be.domain.user.entity.User;
 import com.pard.admlong_be.domain.user.repository.UserRepository;
+import com.pard.admlong_be.domain.userChallengeRelation.entity.UserChallengeRelation;
 import com.pard.admlong_be.global.responses.error.exceptions.ProjectException;
 import com.pard.admlong_be.global.security.jwt.JWTUtil;
 import com.pard.admlong_be.global.util.ResponseDTO;
@@ -67,13 +68,16 @@ public class UserService {
                 throw new ProjectException.UserNotExistException("없는 유저입니다.");
             }
             User user = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(() -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."));
-            Challenge challenge = user.getChallenge();
-            Optional<Challenge> optionalChallenge = Optional.ofNullable(challenge);
+            List<Challenge> challengeList = user.getUserChallengeRelationList().stream()
+                    .map(UserChallengeRelation::getChallenge)
+                    .toList();
             UserResponseDTO.GetUserResponseDTO response;
-            if (!optionalChallenge.isPresent()) {
+            if (challengeList.isEmpty()) {
                 response = new UserResponseDTO.GetUserResponseDTO(user);
             } else {
-                ChallengeResponseDTO.GetChallengeResponse userChallenge = new ChallengeResponseDTO.GetChallengeResponse(optionalChallenge.get());
+                List<ChallengeResponseDTO.GetChallengeResponse> userChallenge = challengeList.stream()
+                        .map(ChallengeResponseDTO.GetChallengeResponse::new)
+                        .toList();
                 response = new UserResponseDTO.GetUserResponseDTO(user, userChallenge);
             }
             return new ResponseDTO(true, "유저 정보 탐색 성공", response);

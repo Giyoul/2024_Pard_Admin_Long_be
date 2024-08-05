@@ -52,7 +52,7 @@ public class UserResponseDTO {
         private Double height;
         private Double weight;
         private String blood_type;
-        private ChallengeResponseDTO.GetChallengeResponse challenge_list;
+        private List<ChallengeResponseDTO.GetChallengeResponse> challenge_list;
 
         public GetUserResponseDTO(User user) {
             this.name = user.getName();
@@ -64,7 +64,7 @@ public class UserResponseDTO {
             this.challenge_list = null;
         }
 
-        public GetUserResponseDTO(User user, ChallengeResponseDTO.GetChallengeResponse userChallenge) {
+        public GetUserResponseDTO(User user, List<ChallengeResponseDTO.GetChallengeResponse> userChallenge) {
             this.name = user.getName();
             this.birthday = user.getBirthday();
             this.gender = user.getGender();

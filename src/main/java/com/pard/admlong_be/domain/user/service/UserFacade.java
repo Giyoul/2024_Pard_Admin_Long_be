@@ -22,6 +22,7 @@ public class UserFacade {
 
     public ResponseDTO login(String email, HttpServletResponse response) {
         try {
+            cookieService.clearJwtCookie(response);
             User user = userService.login(email);
             //JWT 토큰 생성 로직
             String token = jWTUtil.createJwt(user.getName(), user.getEmail());
@@ -43,6 +44,7 @@ public class UserFacade {
             if (userRepository.existsByEmail(userRequestDTO.getEmail())) {
                 return new ResponseDTO(true, "이미 존재하는 사용자입니다.", new UserResponseDTO.UserLoginResponseDTO());
             }
+            cookieService.clearJwtCookie(response);
             User user = userService.register(userRequestDTO);
             String token = jWTUtil.createJwt(user.getName(), user.getEmail());
             response.addCookie(cookieService.createCookie("Authorization", token));

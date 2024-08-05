@@ -53,8 +53,8 @@ public class ChallengeResponseDTO {
             this.challenge_age = challenge.getChallenge_age();
             this.challenge_org = challenge.getChallenge_org();
             this.challenge_like_count = challenge.getChallengeLike().getLike_count();
-            this.user = challenge.getUserList().stream()
-                    .map(user1 -> new UserResponseDTO.GetShortUserInfoDTO(user1))
+            this.user = challenge.getUserChallengeRelationList().stream()
+                    .map(userChallengeRelation -> new UserResponseDTO.GetShortUserInfoDTO(userChallengeRelation.getUser()))
                     .collect(Collectors.toList());
         }
     }

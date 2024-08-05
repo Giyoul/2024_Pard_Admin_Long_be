@@ -4,6 +4,8 @@ import com.pard.admlong_be.domain.challenge.dto.request.ChallengeRequestDTO;
 import com.pard.admlong_be.domain.challenge.dto.response.ChallengeResponseDTO;
 import com.pard.admlong_be.domain.challenge.entity.Challenge;
 import com.pard.admlong_be.domain.challenge.repository.ChallengeRepository;
+import com.pard.admlong_be.domain.challengelike.entity.ChallengeLike;
+import com.pard.admlong_be.domain.challengelike.repository.ChallengeLikeRepository;
 import com.pard.admlong_be.global.util.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,14 +24,17 @@ import org.springframework.scheduling.annotation.Scheduled;
 @RequiredArgsConstructor
 public class ChallengeService {
     private final ChallengeRepository challengeRepository;
+    private final ChallengeLikeRepository challengeLikeRepository;
 
     @Transactional
     public ResponseDTO createChallenge(ChallengeRequestDTO.createChallengeRequestDTO request) {
         try {
             Challenge challenge = new Challenge();
+            ChallengeLike challengeLike = new ChallengeLike(challenge);
             Boolean challenge_finished = challengeFinished(request);
             challenge.createChallenge(request, challenge_finished);
             challengeRepository.save(challenge);
+            challengeLikeRepository.save(challengeLike);
             return  new ResponseDTO(true, "Successfully created challenge");
         } catch (Exception e) {
             return new ResponseDTO(false, e.getMessage());

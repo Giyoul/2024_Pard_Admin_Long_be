@@ -1,5 +1,6 @@
-package com.pard.admlong_be.domain.challengelike.entity;
+package com.pard.admlong_be.domain.userChallengeRelation.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pard.admlong_be.domain.challenge.entity.Challenge;
 import com.pard.admlong_be.domain.user.entity.User;
 import jakarta.persistence.*;
@@ -9,28 +10,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Getter
-@Table(name = "challenge_like")
-public class ChallengeLike {
+@Table(name = "user_challenge_relation")
+public class UserChallengeRelation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long challenge_like_id;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "challenge_id")
-    private Challenge challenge;
+    private Long user_challenge_relation_id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore // 순환참조 방지
     private User user;
 
-    private Integer like_count;
-
-    public ChallengeLike(Challenge challenge) {
-        this.challenge = challenge;
-        this.like_count = 0;
-    }
+    @ManyToOne
+    @JoinColumn(name = "challenge_id")
+    @JsonIgnore // 순환참조 방지
+    private Challenge challenge;
 }

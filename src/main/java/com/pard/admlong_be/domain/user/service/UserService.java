@@ -1,6 +1,7 @@
 package com.pard.admlong_be.domain.user.service;
 
 import com.pard.admlong_be.domain.challenge.dto.response.ChallengeResponseDTO;
+import com.pard.admlong_be.domain.challenge.entity.Challenge;
 import com.pard.admlong_be.domain.user.dto.request.UserRequestDTO;
 import com.pard.admlong_be.domain.user.dto.response.UserResponseDTO;
 import com.pard.admlong_be.domain.user.entity.User;
@@ -20,6 +21,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -65,15 +67,24 @@ public class UserService {
                 throw new ProjectException.UserNotExistException("없는 유저입니다.");
             }
             User user = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(() -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."));
-            ChallengeResponseDTO.GetChallengeResponse userChallenge = new ChallengeResponseDTO.GetChallengeResponse(user.getChallenge());
-            UserResponseDTO.GetUserResponseDTO response = new UserResponseDTO.GetUserResponseDTO(user, userChallenge);
+            Challenge challenge = user.getChallenge();
+            Optional<Challenge> optionalChallenge = Optional.ofNullable(challenge);
+            UserResponseDTO.GetUserResponseDTO response;
+            if (!optionalChallenge.isPresent()) {
+                response = new UserResponseDTO.GetUserResponseDTO(user);
+            } else {
+                ChallengeResponseDTO.GetChallengeResponse userChallenge = new ChallengeResponseDTO.GetChallengeResponse(optionalChallenge.get());
+                response = new UserResponseDTO.GetUserResponseDTO(user, userChallenge);
+            }
             return new ResponseDTO(true, "유저 정보 탐색 성공", response);
+        } catch (ProjectException.ChallengeNotExistException e) {
+            return new ResponseDTO(false, e.getMessage());
         } catch (ProjectException.UserNotFoundException e) {
             return new ResponseDTO(false, e.getMessage());
         } catch (ProjectException.UserNotExistException e) {
             return new ResponseDTO(false, e.getMessage());
         } catch (Exception e) {
-            return new ResponseDTO(false, "유저 서칭 과정에서 token으로 검색 중 처리되지 않은 오류가 발생했습니다.\n" + e.getMessage());
+            return new ResponseDTO(false, "유저 서칭 과정에서 token으로 검색 중 처리되지 않은 오류가 발생했습니다. -> " + e.getMessage());
         }
     }
 

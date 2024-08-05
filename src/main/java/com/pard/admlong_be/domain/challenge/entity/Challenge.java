@@ -3,6 +3,7 @@ package com.pard.admlong_be.domain.challenge.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pard.admlong_be.domain.bloodDonation.entity.BloodDonation;
 import com.pard.admlong_be.domain.challenge.dto.request.ChallengeRequestDTO;
+import com.pard.admlong_be.domain.challengelike.entity.ChallengeLike;
 import com.pard.admlong_be.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,6 @@ public class Challenge {
     private String challenge_age;
     private String challenge_description;
     private String challenge_org;
-    private Integer challenge_like_count;
     private Boolean challenge_finished;
 
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = false)
@@ -41,6 +41,10 @@ public class Challenge {
     @JsonIgnore // 순환 참조 방지
     private List<BloodDonation> bloodDonationList;
 
+    @OneToOne(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private ChallengeLike challengeLike;
+
     public void createChallenge(ChallengeRequestDTO.createChallengeRequestDTO request, Boolean challenge_finished) {
         this.challenge_name = request.getChallenge_name();
         this.challenge_start_date = request.getChallenge_start_date();
@@ -48,7 +52,6 @@ public class Challenge {
         this.challenge_description = request.getChallenge_description();
         this.challenge_org = request.getChallenge_org();
         this.challenge_age = request.getChallenge_age();
-        this.challenge_like_count = 0;
         this.challenge_finished = challenge_finished;
     }
 

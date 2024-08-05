@@ -30,4 +30,8 @@ public class ProjectException extends RuntimeException {
         public InvalidValueException(String errorMessage) {super(errorMessage);}
     }
 
+    public static class ChallengeNotExistException extends ProjectException {
+        public ChallengeNotExistException(String errorMessage) {super(errorMessage);}
+    }
+
 }

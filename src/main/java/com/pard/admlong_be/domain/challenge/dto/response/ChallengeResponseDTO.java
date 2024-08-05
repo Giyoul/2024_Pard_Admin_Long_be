@@ -29,7 +29,7 @@ public class ChallengeResponseDTO {
             this.challenge_end_date = challenge.getChallenge_end_date();
             this.challenge_age = challenge.getChallenge_age();
             this.challenge_org = challenge.getChallenge_org();
-            this.challenge_like_count = challenge.getChallenge_like_count();
+            this.challenge_like_count = challenge.getChallengeLike().getLike_count();
         }
     }
 
@@ -52,7 +52,7 @@ public class ChallengeResponseDTO {
             this.challenge_end_date = challenge.getChallenge_end_date();
             this.challenge_age = challenge.getChallenge_age();
             this.challenge_org = challenge.getChallenge_org();
-            this.challenge_like_count = challenge.getChallenge_like_count();
+            this.challenge_like_count = challenge.getChallengeLike().getLike_count();
             this.user = challenge.getUserList().stream()
                     .map(user1 -> new UserResponseDTO.GetShortUserInfoDTO(user1))
                     .collect(Collectors.toList());

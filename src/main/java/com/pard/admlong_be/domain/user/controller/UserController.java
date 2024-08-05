@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ public class UserController {
     @Operation(summary = "이메일을 입력하고 토큰을 받아옵니다.", description = "유저의 이메일을 입력하면, 해당 유저의 토큰을 발급해줍니다.")
     public ResponseEntity<ResponseDTO> login(@RequestParam String email, HttpServletResponse response) {
         ResponseDTO responseDTO = userFacade.login(email, response);
+        response.setHeader(HttpHeaders.CACHE_CONTROL, "no-store");
         return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
     }
 
@@ -37,6 +39,7 @@ public class UserController {
     @Operation(summary = "정보들을 보내주고, 회원 가입을 진행합니다.", description = "유저의 정보를 입력하면, 해당 유저의 정보를 저장하고 토큰을 발급해줍니다.")
     public ResponseEntity<ResponseDTO> register(@RequestBody UserRequestDTO.Register request, HttpServletResponse response) {
         ResponseDTO responseDTO = userFacade.register(request, response);
+        response.setHeader(HttpHeaders.CACHE_CONTROL, "no-store");
         return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
     }
 

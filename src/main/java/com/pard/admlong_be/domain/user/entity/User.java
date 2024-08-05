@@ -3,13 +3,12 @@ package com.pard.admlong_be.domain.user.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pard.admlong_be.domain.bloodDonation.entity.BloodDonation;
 import com.pard.admlong_be.domain.challenge.entity.Challenge;
+import com.pard.admlong_be.domain.challengelike.entity.ChallengeLike;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 import java.util.Date;
 import java.util.List;
@@ -46,6 +45,10 @@ public class User {
     @JoinColumn(name = "challenge_id")
     @JsonIgnore // 순환참조 방지
     private Challenge challenge;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<ChallengeLike> likeList;
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
 //    @JsonIgnore // 순환 참조 방지

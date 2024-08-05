@@ -42,9 +42,14 @@ public class User {
 
     private Date last_donation_date;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
-    @JsonIgnore // 순환 참조 방지
-    private List<Challenge> challengeList;
+    @ManyToOne
+    @JoinColumn(name = "challenge_id")
+    @JsonIgnore // 순환참조 방지
+    private Challenge challenge;
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
+//    @JsonIgnore // 순환 참조 방지
+//    private List<Challenge> challengeList;
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
 //    @JsonIgnore // 순환 참조 방지

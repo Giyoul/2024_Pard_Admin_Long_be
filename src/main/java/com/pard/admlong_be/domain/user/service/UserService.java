@@ -65,10 +65,8 @@ public class UserService {
                 throw new ProjectException.UserNotExistException("없는 유저입니다.");
             }
             User user = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(() -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."));
-            List<ChallengeResponseDTO.GetChallengeResponse> userChallengeList = user.getChallengeList()
-                    .stream().map(ChallengeResponseDTO.GetChallengeResponse::new)
-                    .collect(Collectors.toList());
-            UserResponseDTO.GetUserResponseDTO response = new UserResponseDTO.GetUserResponseDTO(user, userChallengeList);
+            ChallengeResponseDTO.GetChallengeResponse userChallenge = new ChallengeResponseDTO.GetChallengeResponse(user.getChallenge());
+            UserResponseDTO.GetUserResponseDTO response = new UserResponseDTO.GetUserResponseDTO(user, userChallenge);
             return new ResponseDTO(true, "유저 정보 탐색 성공", response);
         } catch (ProjectException.UserNotFoundException e) {
             return new ResponseDTO(false, e.getMessage());

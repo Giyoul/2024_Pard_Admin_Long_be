@@ -33,10 +33,9 @@ public class Challenge {
     private Integer challenge_like_count;
     private Boolean challenge_finished;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore // 순환참조 방지
-    private User user;
+    @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = false)
+    @JsonIgnore
+    private List<User> userList;
 
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = false)
     @JsonIgnore // 순환 참조 방지

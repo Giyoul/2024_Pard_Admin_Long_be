@@ -52,16 +52,16 @@ public class UserResponseDTO {
         private Double height;
         private Double weight;
         private String blood_type;
-        private List<ChallengeResponseDTO.GetChallengeResponse> challenge_list;
+        private ChallengeResponseDTO.GetChallengeResponse challenge_list;
 
-        public GetUserResponseDTO(User user, List<ChallengeResponseDTO.GetChallengeResponse> userChallengeList) {
+        public GetUserResponseDTO(User user, ChallengeResponseDTO.GetChallengeResponse userChallenge) {
             this.name = user.getName();
             this.birthday = user.getBirthday();
             this.gender = user.getGender();
             this.height = user.getHeight();
             this.weight = user.getWeight();
             this.blood_type = user.getBlood_type();
-            this.challenge_list = userChallengeList;
+            this.challenge_list = userChallenge;
         }
     }
 
@@ -72,6 +72,18 @@ public class UserResponseDTO {
 
         public GetDueDateResponseDTO(long dueDate) {
             this.dueDate = dueDate;
+        }
+    }
+
+    @Getter
+    @Setter
+    public static class GetShortUserInfoDTO {
+        private String name;
+        private String blood_type;
+
+        public GetShortUserInfoDTO(User user) {
+            this.name = user.getName();
+            this.blood_type = user.getBlood_type();
         }
     }
 }

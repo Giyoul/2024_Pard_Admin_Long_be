@@ -1,6 +1,7 @@
 package com.pard.admlong_be.domain.challenge.service;
 
 import com.pard.admlong_be.domain.challenge.dto.request.ChallengeRequestDTO;
+import com.pard.admlong_be.domain.challenge.dto.response.ChallengeResponseDTO;
 import com.pard.admlong_be.domain.challenge.entity.Challenge;
 import com.pard.admlong_be.domain.challenge.repository.ChallengeRepository;
 import com.pard.admlong_be.global.util.ResponseDTO;
@@ -12,6 +13,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.scheduling.annotation.Scheduled;
 
 
@@ -82,5 +85,17 @@ public class ChallengeService {
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
+    }
+
+    public ResponseDTO findChallengeById(Long id) {
+        try {
+            Optional<Challenge> challenge = challengeRepository.findById(id);
+            if (!challenge.isPresent()) {
+                return new ResponseDTO(false, "Challenge not found");
+            }
+            return new ResponseDTO(true, "Successfully retrieved challenge", new ChallengeResponseDTO.FindChallengeBdIdResponse(challenge.get()));
+        } catch (Exception e) {
+            return new ResponseDTO(false, e.getMessage());
+        }
     }
 }

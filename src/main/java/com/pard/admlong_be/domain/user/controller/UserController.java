@@ -4,6 +4,8 @@ import com.pard.admlong_be.domain.user.dto.request.UserRequestDTO;
 import com.pard.admlong_be.domain.user.dto.response.UserResponseDTO;
 import com.pard.admlong_be.domain.user.service.UserFacade;
 import com.pard.admlong_be.domain.user.service.UserService;
+import com.pard.admlong_be.global.security.cookie.service.CookieService;
+import com.pard.admlong_be.global.security.jwt.JWTUtil;
 import com.pard.admlong_be.global.util.ResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.Cookie;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserFacade userFacade;
     private final UserService userService;
+    private final CookieService cookieService;
 
     @GetMapping("/login")
     @Operation(summary = "이메일을 입력하고 토큰을 받아옵니다.", description = "유저의 이메일을 입력하면, 해당 유저의 토큰을 발급해줍니다.")
@@ -38,21 +41,25 @@ public class UserController {
     }
 
     @DeleteMapping("/cookie/delete")
+    @Operation(summary = "쿠키를 삭제해줍니다.", description = "쿠키를 삭제해줍니다.")
     public ResponseEntity<ResponseDTO> deleteCookie(HttpServletRequest request, HttpServletResponse response) {
+
         // 요청에서 모든 쿠키를 가져옵니다.
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                // 삭제할 쿠키에 대해 새로운 쿠키 객체를 생성하고, 이름과 값을 그대로 유지합니다.
-                Cookie deleteCookie = new Cookie(cookie.getName(), null);
-                // 쿠키의 유효기간을 0으로 설정하여 삭제를 유도합니다.
-                deleteCookie.setMaxAge(0);
-                // 쿠키의 경로를 기존 쿠키의 경로와 일치시킵니다.
-                deleteCookie.setPath(cookie.getPath() != null ? cookie.getPath() : "/");
+                if(cookie.getName().equals("Authorization")) {
+                    // 삭제할 쿠키에 대해 새로운 쿠키 객체를 생성하고, 이름과 값을 그대로 유지합니다.
+                    Cookie deleteCookie = new Cookie(cookie.getName(), null);
+                    // 쿠키의 유효기간을 0으로 설정하여 삭제를 유도합니다.
+                    deleteCookie.setMaxAge(0);
+                    // 쿠키의 경로를 기존 쿠키의 경로와 일치시킵니다.
+                    deleteCookie.setPath(cookie.getPath() != null ? cookie.getPath() : "/");
 
-                // 응답에 삭제할 쿠키를 추가합니다.
-                response.addCookie(deleteCookie);
+                    // 응답에 삭제할 쿠키를 추가합니다.
+                    response.addCookie(deleteCookie);
+                }
             }
         }
 

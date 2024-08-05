@@ -53,4 +53,8 @@ public class Challenge {
         this.challenge_finished = challenge_finished;
     }
 
+    public void setChallengeFinished(Boolean challenge_finished) {
+        this.challenge_finished = challenge_finished;
+    }
+
 }

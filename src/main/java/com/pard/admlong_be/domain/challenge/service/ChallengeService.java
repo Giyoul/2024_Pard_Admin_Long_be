@@ -10,6 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
+import org.springframework.scheduling.annotation.Scheduled;
+
 
 @Service
 @RequiredArgsConstructor
@@ -46,5 +50,37 @@ public class ChallengeService {
         boolean isBetween = !currentDate.isBefore(startDate) && !currentDate.isAfter(endDate);
 
         return !isBetween;
+    }
+
+    public ResponseDTO getChallengeByFinished(Boolean request) {
+        try {
+            List<Challenge> challengeList = challengeRepository.findChallengesByFinished(request);
+            return new ResponseDTO(true, "Successfully fetched challenge information", challengeList);
+        } catch (Exception e) {
+            return new ResponseDTO(false, e.getMessage());
+        }
+    }
+
+    @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
+    public void updateChallengesFinishedStatus() {
+        LocalDate today = LocalDate.now();
+        List<Challenge> challenges = challengeRepository.findAll();
+        for (Challenge challenge : challenges) {
+            Date endDate = challenge.getChallenge_end_date();
+            LocalDate endLocalDate = convertToLocalDateViaInstant(endDate);
+            if (endLocalDate.isBefore(today) || endLocalDate.isEqual(today)) {
+                if (!challenge.getChallenge_finished()) {
+                    challenge.setChallengeFinished(true);
+                    challengeRepository.save(challenge);
+                }
+            }
+        }
+    }
+
+    // Date를 LocalDate로 변환하는 메소드
+    private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 }

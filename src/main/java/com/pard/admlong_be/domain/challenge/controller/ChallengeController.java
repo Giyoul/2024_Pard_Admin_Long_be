@@ -43,6 +43,10 @@ public class ChallengeController {
         return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
     }
 
-//    @GetMapping("/my")
-//    @Operation(summary = "챌린지 참여하기", description = "토큰과 챌린지 id를 보내주면, 해당 챌린지 id의 챌린지에 사용자를 추가해줍니다.")
+    @GetMapping("/my")
+    @Operation(summary = "내가 속한 챌린지 정보 가져오기.", description = "내가 속해있는 모든 챌린지의 상세 정보를 알려줍니다.")
+    public ResponseEntity<ResponseDTO> getDetailChallenge(@CookieValue(value = "Authorization") String token) {
+        ResponseDTO responseDTO = challengeService.getDetailChallenge(token);
+        return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
+    }
 }

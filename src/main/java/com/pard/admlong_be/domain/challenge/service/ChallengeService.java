@@ -146,4 +146,25 @@ public class ChallengeService {
             return new ResponseDTO(false, "챌린지 가입 과정 중 처리되지 않은 예외가 발생했습니다. -> " + e.getMessage());
         }
     }
+
+    @Transactional
+    public ResponseDTO getDetailChallenge(String token) {
+        try {
+            if (!userRepository.existsByEmail(jwtUtil.getEmail(token))) {
+                throw new ProjectException.UserNotExistException("없는 유저입니다.");
+            }
+            User user = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(() -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."));
+            List<ChallengeResponseDTO.FindAllChallengeByUserResponse> responseList = user.getUserChallengeRelationList()
+                    .stream()
+                    .map(userChallengeRelation -> new ChallengeResponseDTO.FindAllChallengeByUserResponse(userChallengeRelation.getChallenge()))
+                    .toList();
+            return new ResponseDTO(true, "Successfully retrieved challenge", responseList);
+        } catch (ProjectException.UserNotFoundException e) {
+            return new ResponseDTO(false, e.getMessage());
+        } catch (ProjectException.UserNotExistException e) {
+            return new ResponseDTO(false, e.getMessage());
+        } catch (Exception e) {
+            return new ResponseDTO(false, "챌린지 가입 과정 중 처리되지 않은 예외가 발생했습니다. -> " + e.getMessage());
+        }
+    }
 }

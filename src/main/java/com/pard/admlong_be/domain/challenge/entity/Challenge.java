@@ -3,6 +3,7 @@ package com.pard.admlong_be.domain.challenge.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pard.admlong_be.domain.bloodDonation.entity.BloodDonation;
 import com.pard.admlong_be.domain.challenge.dto.request.ChallengeRequestDTO;
+import com.pard.admlong_be.domain.challengeDonationRelation.entity.ChallengeDonationRelation;
 import com.pard.admlong_be.domain.challengelike.entity.ChallengeLike;
 import com.pard.admlong_be.domain.user.entity.User;
 import com.pard.admlong_be.domain.userChallengeRelation.entity.UserChallengeRelation;
@@ -34,10 +35,6 @@ public class Challenge {
     private String challenge_org;
     private Boolean challenge_finished;
 
-    @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = false)
-    @JsonIgnore // 순환 참조 방지
-    private List<BloodDonation> bloodDonationList;
-
     @OneToOne(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private ChallengeLike challengeLike;
@@ -45,6 +42,10 @@ public class Challenge {
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<UserChallengeRelation> userChallengeRelationList;
+
+    @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore // 순환 참조 방지
+    private List<ChallengeDonationRelation> challengeDonationRelationList;
 
     public void createChallenge(ChallengeRequestDTO.createChallengeRequestDTO request, Boolean challenge_finished) {
         this.challenge_name = request.getChallenge_name();

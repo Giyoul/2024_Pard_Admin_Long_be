@@ -2,7 +2,6 @@ package com.pard.admlong_be.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pard.admlong_be.domain.bloodDonation.entity.BloodDonation;
-import com.pard.admlong_be.domain.challenge.entity.Challenge;
 import com.pard.admlong_be.domain.challengelike.entity.ChallengeLike;
 import com.pard.admlong_be.domain.userChallengeRelation.entity.UserChallengeRelation;
 import jakarta.persistence.*;
@@ -53,4 +52,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore // 순환 참조 방지
     private List<BloodDonation> bloodDonationList;
+
+    public void addBloodDonation(BloodDonation bloodDonation) {
+        bloodDonationList.add(bloodDonation);
+    }
 }

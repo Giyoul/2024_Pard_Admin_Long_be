@@ -35,4 +35,10 @@ public class BloodDonation {
     @JoinColumn(name = "challenge_id")
     @JsonIgnore // 순환참조 방지
     private Challenge challenge;
+
+    public BloodDonation(Date donation_date, String donation_location, String donation_type) {
+        this.donation_date = donation_date;
+        this.donation_location = donation_location;
+        this.donation_type = donation_type;
+    }
 }

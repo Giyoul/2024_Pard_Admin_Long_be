@@ -33,6 +33,7 @@ public class Challenge {
     private String challenge_age;
     private String challenge_description;
     private String challenge_org;
+    private Integer challenge_gender;
     private Boolean challenge_finished;
 
     @OneToMany(mappedBy = "challenge", orphanRemoval = true)
@@ -54,6 +55,7 @@ public class Challenge {
         this.challenge_description = request.getChallenge_description();
         this.challenge_org = request.getChallenge_org();
         this.challenge_age = request.getChallenge_age();
+        this.challenge_gender = request.getChallenge_gender();
         this.challenge_finished = challenge_finished;
     }
 

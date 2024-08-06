@@ -16,5 +16,6 @@ public class ChallengeRequestDTO {
         private Date challenge_end_date;
         private String challenge_age;
         private String challenge_org;
+        private Integer challenge_gender;
     }
 }

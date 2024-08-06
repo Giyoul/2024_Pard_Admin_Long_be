@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -72,15 +73,24 @@ public class ChallengeService {
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
 
-        // 현재 날짜가 시작일과 종료일 사이에 있는지 확인
-        boolean isBetween = !currentDate.isBefore(startDate) && !currentDate.isAfter(endDate);
+        // 현재 날짜가 시작일보다 이전인 경우 false 반환 (진행 중이지 않음)
+        if (currentDate.isBefore(startDate)) {
+            return false; // 챌린지가 시작되지 않음
+        }
 
-        return !isBetween;
+        // 현재 날짜가 종료일 이후인 경우 true 반환 (챌린지 종료)
+        if (currentDate.isAfter(endDate)) {
+            return true; // 챌린지가 종료됨
+        }
+
+        // 현재 날짜가 시작일과 종료일 사이에 있는 경우 false 반환 (진행 중인 챌린지)
+        return false; // 챌린지가 진행 중
     }
 
     public ResponseDTO getChallengeByFinished(Boolean request) {
         try {
             List<Challenge> challengeList = challengeRepository.findChallengesByFinished(request);
+            Collections.reverse(challengeList);
             return new ResponseDTO(true, "Successfully fetched challenge information", challengeList);
         } catch (Exception e) {
             return new ResponseDTO(false, e.getMessage());

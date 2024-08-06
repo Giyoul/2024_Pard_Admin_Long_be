@@ -49,4 +49,11 @@ public class ChallengeController {
         ResponseDTO responseDTO = challengeService.getDetailChallenge(token);
         return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
     }
+
+    @PostMapping("/like")
+    @Operation(summary = "좋아요 누르기/취소하기", description = "이 api를 사용하면 true/false를 반환하는데, 취소했으면 false, 좋아요 눌렀으면 true")
+    public ResponseEntity<ResponseDTO> likeChallenge(@CookieValue(value = "Authorization") String token, @RequestParam Long challenge_id) {
+        ResponseDTO responseDTO = challengeService.updateChallengeLikeById(token, challenge_id);
+        return ResponseEntity.status(responseDTO.isSuccess() ? HttpStatus.OK : HttpStatus.FORBIDDEN).body(responseDTO);
+    }
 }

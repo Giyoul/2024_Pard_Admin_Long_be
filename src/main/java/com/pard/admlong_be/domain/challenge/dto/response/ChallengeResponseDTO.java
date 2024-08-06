@@ -30,7 +30,7 @@ public class ChallengeResponseDTO {
             this.challenge_end_date = challenge.getChallenge_end_date();
             this.challenge_age = challenge.getChallenge_age();
             this.challenge_org = challenge.getChallenge_org();
-            this.challenge_like_count = challenge.getChallengeLike().getLike_count();
+            this.challenge_like_count = challenge.getChallengeLikeList().size();
         }
     }
 
@@ -53,7 +53,8 @@ public class ChallengeResponseDTO {
             this.challenge_end_date = challenge.getChallenge_end_date();
             this.challenge_age = challenge.getChallenge_age();
             this.challenge_org = challenge.getChallenge_org();
-            this.challenge_like_count = challenge.getChallengeLike().getLike_count();
+            this.challenge_like_count = challenge.getChallengeLikeList().size();
+
             this.user = challenge.getUserChallengeRelationList().stream()
                     .map(userChallengeRelation -> new UserResponseDTO.GetShortUserInfoDTO(userChallengeRelation.getUser()))
                     .collect(Collectors.toList());
@@ -81,7 +82,7 @@ public class ChallengeResponseDTO {
             this.challenge_end_date = challenge.getChallenge_end_date();
             this.challenge_age = challenge.getChallenge_age();
             this.challenge_org = challenge.getChallenge_org();
-            this.challenge_like_count = challenge.getChallengeLike().getLike_count();
+            this.challenge_like_count = challenge.getChallengeLikeList().size();
             this.blood_donation = challenge.getChallengeDonationRelationList().stream()
                     .map(challengeDonationRelation -> new BloodDonationResponseDTO.BloodDonationInfo(challengeDonationRelation.getBloodDonation())).toList();
         }

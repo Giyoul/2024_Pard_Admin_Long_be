@@ -35,9 +35,9 @@ public class Challenge {
     private String challenge_org;
     private Boolean challenge_finished;
 
-    @OneToOne(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "challenge", orphanRemoval = true)
     @JsonIgnore
-    private ChallengeLike challengeLike;
+    private List<ChallengeLike> challengeLikeList;
 
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

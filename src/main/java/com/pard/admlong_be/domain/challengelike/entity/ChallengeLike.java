@@ -19,7 +19,7 @@ public class ChallengeLike {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long challenge_like_id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "challenge_id")
     private Challenge challenge;
 
@@ -27,10 +27,12 @@ public class ChallengeLike {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private Integer like_count;
-
     public ChallengeLike(Challenge challenge) {
         this.challenge = challenge;
-        this.like_count = 0;
+    }
+
+    public ChallengeLike(Challenge challenge, User user) {
+        this.challenge = challenge;
+        this.user = user;
     }
 }

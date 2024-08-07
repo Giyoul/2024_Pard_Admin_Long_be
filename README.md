@@ -207,15 +207,39 @@
 ## Team Member
 
 
-|                                                                       🐣 이주향                                                                        |                                                                       🐭 김예정                                                                        |                          🦉 김기영                           |                                                                       🐱 김광일                                                                        |
-|:---------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
-|                                                                         PM                                                                          |                                                                         디자인                                                                         |                            백엔드                            |                                                                        프런트엔드                                                                        |
-| <img src="https://github.com/user-attachments/assets/0cb0a3f5-ca61-4548-9cc3-953539e6b531" style="width: 150px; height: 150px; object-fit: cover;"> | <img src="https://github.com/user-attachments/assets/02dbe393-2fc6-4092-8077-91bf20868d8d" style="width: 150px; height: 150px; object-fit: cover;"> | <img src="https://github.com/user-attachments/assets/d0b3d498-5623-461b-b4b4-46863dd450c8" style="width: 150px; height: 150px; object-fit: cover;"> | <img src="https://github.com/user-attachments/assets/2c5bf7ad-e880-4520-9819-fe4a293d5073" style="width: 150px; height: 150px; object-fit: cover;"> |
-|                                                                       🐰 권채은                                                                        |
-|                                                                        프런트엔드                                                                        |
-| <img src="https://github.com/user-attachments/assets/4a5a11e4-c79b-440b-a764-d937fcf2015c" style="width: 150px; height: 150px; object-fit: cover;"> |
+<table style = "text-align : center">
+<tr>
+   <th>🐣 이주향</th>
+   <th>🐭 김예정</th>
+   <th></th>
+</tr>
+<tr>
+   <td>기획/PM</td>
+   <td>디자인</td>
+   <td></td>
+</tr>
+<tr>
+   <td><img src="https://github.com/user-attachments/assets/0cb0a3f5-ca61-4548-9cc3-953539e6b531" style="width: 150px; height: 150px; object-fit: cover;"></td>
+   <td><img src="https://github.com/user-attachments/assets/02dbe393-2fc6-4092-8077-91bf20868d8d" style="width: 150px; height: 150px; object-fit: cover;"> </td>
+   <td></td>
+</tr>
+<tr>
+   <th>🐱 김광일</th>
+   <th>🐰 권채은</th>
+   <th>🦉 김기영</th>
+</tr>
+<tr>
+   <td>프론트엔드</td>
+   <td>프론트엔드</td>
+   <td>백엔드</td>
+</tr>
+<tr>
+   <td><img src="https://github.com/user-attachments/assets/2c5bf7ad-e880-4520-9819-fe4a293d5073" style="width: 150px; height: 150px; object-fit: cover;"></td>
+   <td><img src="https://github.com/user-attachments/assets/4a5a11e4-c79b-440b-a764-d937fcf2015c" style="width: 150px; height: 150px; object-fit: cover;"></td>
+   <td><img src="https://github.com/user-attachments/assets/d0b3d498-5623-461b-b4b4-46863dd450c8" style="width: 150px; height: 150px; object-fit: cover;"></td>
+</tr>
 
-
+</table>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 

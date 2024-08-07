@@ -382,7 +382,7 @@
 
 ## ERD
 
-<img src="https://github.com/user-attachments/assets/d6ef09aa-4eac-4b47-a875-77c7f08645e4">
+<img src="https://github.com/user-attachments/assets/e6ddcac2-1d27-4eba-99e2-452fb0d7f84f">
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

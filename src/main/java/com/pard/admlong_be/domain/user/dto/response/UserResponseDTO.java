@@ -1,5 +1,7 @@
 package com.pard.admlong_be.domain.user.dto.response;
 
+import com.pard.admlong_be.domain.bloodDonation.dto.response.BloodDonationResponseDTO;
+import com.pard.admlong_be.domain.bloodDonation.entity.BloodDonation;
 import com.pard.admlong_be.domain.challenge.dto.response.ChallengeResponseDTO;
 import com.pard.admlong_be.domain.user.entity.User;
 import com.pard.admlong_be.domain.user.service.UserService;
@@ -90,10 +92,13 @@ public class UserResponseDTO {
     public static class GetShortUserInfoDTO {
         private String name;
         private String blood_type;
+        private List<BloodDonationResponseDTO.BloodDonationInfo> blood_donation_list;
 
         public GetShortUserInfoDTO(User user) {
             this.name = user.getName();
             this.blood_type = user.getBlood_type();
+            this.blood_donation_list = user.getBloodDonationList().stream()
+                    .map(BloodDonationResponseDTO.BloodDonationInfo::new).toList();
         }
     }
 }

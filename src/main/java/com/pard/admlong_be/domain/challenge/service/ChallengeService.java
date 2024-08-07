@@ -120,13 +120,24 @@ public class ChallengeService {
                 .toLocalDate();
     }
 
-    public ResponseDTO findChallengeById(Long id) {
+    public ResponseDTO findChallengeById(Long id, String token) {
         try {
             Optional<Challenge> challenge = challengeRepository.findById(id);
             if (!challenge.isPresent()) {
                 return new ResponseDTO(false, "Challenge not found");
             }
-            return new ResponseDTO(true, "Successfully retrieved challenge", new ChallengeResponseDTO.FindChallengeBdIdResponse(challenge.get()));
+            if (!userRepository.existsByEmail(jwtUtil.getEmail(token))) {
+                throw new ProjectException.UserNotExistException("없는 유저입니다.");
+            }
+            User user = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(() -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."));
+            boolean joined = challenge.get().getUserChallengeRelationList().stream()
+                    .anyMatch(userChallengeRelation -> userChallengeRelation.getUser().equals(user));
+
+            return new ResponseDTO(true, "Successfully retrieved challenge", new ChallengeResponseDTO.FindChallengeBdIdResponse(challenge.get(), joined));
+        } catch (ProjectException.UserNotFoundException e) {
+            return new ResponseDTO(false, e.getMessage());
+        } catch (ProjectException.UserNotExistException e) {
+            return new ResponseDTO(false, e.getMessage());
         } catch (Exception e) {
             return new ResponseDTO(false, e.getMessage());
         }
@@ -142,6 +153,10 @@ public class ChallengeService {
             Optional<Challenge> challenge = challengeRepository.findById(challenge_id);
             if (!challenge.isPresent()) {
                 throw new ProjectException.ChallengeNotExistException("없는 챌린지입니다.");
+            }
+            if (challenge.get().getUserChallengeRelationList().stream()
+                    .anyMatch(userChallengeRelation -> userChallengeRelation.getUser().equals(user))) {
+                return new ResponseDTO(true, "이미 참가한 챌린지입니다.");
             }
             UserChallengeRelation userChallengeRelation = new UserChallengeRelation(user, challenge.get());
             userChallengeRelationRepository.save(userChallengeRelation);

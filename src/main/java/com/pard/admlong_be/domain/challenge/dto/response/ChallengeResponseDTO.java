@@ -38,6 +38,7 @@ public class ChallengeResponseDTO {
     @Setter
     public static class FindChallengeBdIdResponse {
         private Long challenge_id;
+        private Boolean challenge_user_joined;
         private String challenge_name;
         private Date challenge_start_date;
         private Date challenge_end_date;
@@ -48,8 +49,9 @@ public class ChallengeResponseDTO {
         private Integer challenge_gender;
         List<UserResponseDTO.GetShortUserInfoDTO> user;
 
-        public FindChallengeBdIdResponse(Challenge challenge) {
+        public FindChallengeBdIdResponse(Challenge challenge, Boolean joined) {
             this.challenge_id = challenge.getChallenge_id();
+            this.challenge_user_joined = joined;
             this.challenge_name = challenge.getChallenge_name();
             this.challenge_start_date = challenge.getChallenge_start_date();
             this.challenge_end_date = challenge.getChallenge_end_date();

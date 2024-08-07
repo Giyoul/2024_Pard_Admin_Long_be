@@ -225,6 +225,7 @@ public class QuestionnaireService {
                     responseDTO = new QuestionnaireResponseDTO.response(request, new QuestionnaireResponseDTO.reason("", null, reason1, reason2, reason3, reason4, reason5, reason6, reason7, reason8, reason9, reason10, reason11));
                 }
 
+
                 return new ResponseDTO(true, "문진 성공", responseDTO);
             }
 

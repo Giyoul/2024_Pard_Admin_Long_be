@@ -44,6 +44,8 @@ public class ChallengeResponseDTO {
         private String challenge_age;
         private String challenge_org;
         private Integer challenge_like_count;
+        private String challenge_description;
+        private Integer challenge_gender;
         List<UserResponseDTO.GetShortUserInfoDTO> user;
 
         public FindChallengeBdIdResponse(Challenge challenge) {
@@ -54,6 +56,8 @@ public class ChallengeResponseDTO {
             this.challenge_age = challenge.getChallenge_age();
             this.challenge_org = challenge.getChallenge_org();
             this.challenge_like_count = challenge.getChallengeLikeList().size();
+            this.challenge_description = challenge.getChallenge_description();
+            this.challenge_gender = challenge.getChallenge_gender();
 
             this.user = challenge.getUserChallengeRelationList().stream()
                     .map(userChallengeRelation -> new UserResponseDTO.GetShortUserInfoDTO(userChallengeRelation.getUser()))
@@ -72,6 +76,7 @@ public class ChallengeResponseDTO {
         private String challenge_age;
         private String challenge_org;
         private Integer challenge_like_count;
+        private Integer challenge_gender;
         private List<BloodDonationResponseDTO.BloodDonationInfo> blood_donation;
 
         public FindAllChallengeByUserResponse(Challenge challenge) {
@@ -83,6 +88,7 @@ public class ChallengeResponseDTO {
             this.challenge_age = challenge.getChallenge_age();
             this.challenge_org = challenge.getChallenge_org();
             this.challenge_like_count = challenge.getChallengeLikeList().size();
+            this.challenge_gender = challenge.getChallenge_gender();
             this.blood_donation = challenge.getChallengeDonationRelationList().stream()
                     .map(challengeDonationRelation -> new BloodDonationResponseDTO.BloodDonationInfo(challengeDonationRelation.getBloodDonation())).toList();
         }

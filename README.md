@@ -1,151 +1,70 @@
 <div align="center">
 
-[//]: # (<a id="readme-top"></a>)
+<a id="readme-top"></a>
 
-[//]: # (<!-- Header banner -->)
 
-[//]: # (<img src="https://capsule-render.vercel.app/api?type=waving&color=0:196E4B,10:2f8f67,30:5eb592,75:93d9bd,100:2f8f67&height=100&section=header&text=&fontSize=0" width="100%"/>)
+<!-- Header banner -->
 
-[//]: # (<br><br>)
 
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:C40C0C,10:F73E09FF,30:FF6500,60:ffaa00,75:FF8A08,100:FF6500&height=100&section=header&text=&fontSize=0" width="100%"/>
+
+
+<br>
 
 
 
 <!-- Title Typing Effect -->
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Wittgenstein&size=40&duration=3000&pause=2300&color=49CBF7&center=true&random=false&height=80&lines=%EA%B4%91%EA%B8%B0+%EC%9E%90%EC%A4%91%ED%95%B4~~" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Wittgenstein&size=40&duration=2000&pause=500&color=F73E09FF&center=true&random=false&height=80&lines=%EB%B8%94%EB%A6%BF%EC%A7%80+;Blood+Bridge" alt="Typing SVG" /></a>
 <br>
 <br>
 
-----
+---
 
-[//]: # (<p align="center">)
+<p align="center">
 
-[//]: # ()
-[//]: # (  <a>)
+  <a>
+    <img src="https://img.shields.io/badge/HTML5-E34F26.svg?style=flat&logo=html5&logoColor=white" alt="HTML">
+  </a>
+  <a>
+    <img src="https://img.shields.io/badge/CSS3-1572B6.svg?style=flat&logo=css3&logoColor=white" alt="CSS">
+  </a>
+  <a>
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=flat&logo=javascript&logoColor=white" alt="js">
+  </a>
+  <a>
+    <img src="https://img.shields.io/badge/AWS-232F3E.svg?style=flat&logo=amazonwebservices&logoColor=white" alt="aws">
+  </a>
+  <a>
+    <img src="https://img.shields.io/badge/springboot-6DB33F.svg?style=flate&logo=springboot&logoColor=white" alt="springboot">
+  </a>
+</p>
 
-[//]: # (    <img src="https://img.shields.io/badge/HTML5-E34F26.svg?style=flat&logo=html5&logoColor=white" alt="HTML">)
 
-[//]: # (  </a>)
-
-[//]: # (  <a>)
-
-[//]: # (    <img src="https://img.shields.io/badge/CSS3-1572B6.svg?style=flat&logo=css3&logoColor=white" alt="CSS">)
-
-[//]: # (  </a>)
-
-[//]: # (  <a>)
-
-[//]: # (    <img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=flat&logo=javascript&logoColor=white" alt="js">)
-
-[//]: # (  </a>)
-
-[//]: # (  <a>)
-
-[//]: # (    <img src="https://img.shields.io/badge/AWS-232F3E.svg?style=flat&logo=amazonwebservices&logoColor=white" alt="aws">)
-
-[//]: # (  </a>)
-
-[//]: # (  <a>)
-
-[//]: # (    <img src="https://img.shields.io/badge/springboot-6DB33F.svg?style=flate&logo=springboot&logoColor=white" alt="springboot">)
-
-[//]: # (  </a>)
-
-[//]: # (</p>)
-
-[//]: # ()
 [//]: # (<br>)
 
+[//]: # ()
 [//]: # (<img src="https://github.com/user-attachments/assets/7f704e6b-e63e-4525-875d-39877b6748b7" width="45%">)
 
-[//]: # (</div>)
-
 [//]: # ()
-[//]: # (<div>)
+</div>
 
 
 
 
-[//]: # (<h3 align="center">Remember done, Record on!</h3>)
+<div>
+<h3 align="center">블릿지 (Blidge)</h3>
 
-[//]: # (  <p align="center">)
-
-[//]: # (    기억이 아닌 기록에 의한 경험을 담아보세요.!)
-
-[//]: # (        <br />)
-
-[//]: # (            <a href="https://github.com/Club-PARD/Record_ON_BE/blob/main/README.md"><strong>Explore the docs »</strong></a>)
-
-[//]: # (        <br />)
-
-[//]: # (    <br />)
-
-[//]: # (  </p>)
+  <p align="center">
+    현재 나의 헌혈 가능 여부를 알려주고, 헌혈 챌린지(그룹)을 만들어 헌혈을 장려하는 웹/앱 서비스 , ‘블릿지’
+        <br />
+            <a href="https://github.com/Club-PARD/Record_ON_BE/blob/main/README.md"><strong>Explore the docs »</strong></a>
+        <br />
+    <br />
+  </p>
 </div>
 
 ---
 
-[//]: # (<!-- 목차 -->)
-
-[//]: # (<details>)
-
-[//]: # (  <summary>목차</summary>)
-
-[//]: # (  <ol>)
-
-[//]: # (    <li>)
-
-[//]: # (      <a href="#service-introduction">Service Introduction</a>)
-
-[//]: # (      <ul>)
-
-[//]: # (        <li><a href="#goals-&-non-goals">Goals & Non-Goals</a></li>)
-
-[//]: # (      </ul>)
-
-[//]: # (    </li>)
-
-[//]: # (    <li>)
-
-[//]: # (      <a href="#functions">Functions</a>)
-
-[//]: # (      <ul>)
-
-[//]: # (        <li><a href="#record">Record</a></li>)
-
-[//]: # (        <li><a href="#view">View</a></li>)
-
-[//]: # (        <li><a href="#filtering">Filtering</a></li>)
-
-[//]: # (      </ul>)
-
-[//]: # (    </li>)
-
-[//]: # (    <li><a href="#deployment-link">Deployment Link</a></li>)
-
-[//]: # (    <li><a href="#user-guide">User Guide</a></li>)
-
-[//]: # (    <li><a href="#erd">ERD</a></li>)
-
-[//]: # (    <li><a href="#commit-message-convention">Commit Message Convention</a></li>)
-
-[//]: # (    <li><a href="#branch-criteria">Branch Criteria</a></li>)
-
-[//]: # (    <li><a href="#stack">Stack</a></li>)
-
-[//]: # (    <li><a href="#documentation">Documentation</a></li>)
-
-[//]: # (    <li><a href="#team-member">Team member</a></li>)
-
-[//]: # (    <li><a href="#acknowledgments">Acknowledgments</a></li>)
-
-[//]: # (  </ol>)
-
-[//]: # (</details>)
-
-[//]: # (<!-- ABOUT THE PROJECT -->)
-
-[//]: # ()
 [//]: # (## Service Introduction)
 
 [//]: # ()
@@ -457,17 +376,16 @@
 [//]: # ()
 [//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)
 
-[//]: # ()
-[//]: # ()
-[//]: # ()
-[//]: # ()
-[//]: # (## ERD)
 
-[//]: # ()
-[//]: # (<img src="https://github.com/user-attachments/assets/7cb351ec-ee2a-43ad-92bb-e7ed07d996c1">)
 
-[//]: # ()
-[//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)
+
+
+## ERD
+
+<img src="https://github.com/user-attachments/assets/d6ef09aa-4eac-4b47-a875-77c7f08645e4">
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Commit Message Convention
@@ -520,8 +438,8 @@
 
 ```
 
-[//]: # ()
-[//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Branch Criteria
@@ -529,96 +447,88 @@
 
 <img src="https://github.com/user-attachments/assets/399474e3-1c20-4bc2-85d9-7b4ea040bcf4">
 
-[//]: # ()
-[//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)
 
-[//]: # ()
-[//]: # (## Stack)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-[//]: # (### 🌟 Frontend&#40;Web&#41;)
 
-[//]: # ()
-[//]: # (>Language : JavaScript    )
+## Stack
 
-[//]: # (>Library & Framework : React, Styled-Components, Axios, Recoil    )
+### 🌟 Frontend(Web)
 
-[//]: # (>Deploy: Firebase)
 
-[//]: # ()
-[//]: # ()
-[//]: # (### 💻 Backend)
+>Language : JavaScript    
 
-[//]: # ()
-[//]: # (>Language : Java    )
+>Library & Framework : React, Styled-Components, Axios, Recoil    
 
-[//]: # (>Library & Framework : Spring Boot    )
+>Deploy: Firebase
 
-[//]: # (>Database : MySQLDB    )
 
-[//]: # (>ORM : JPA     )
 
-[//]: # (>Deploy: Mysql&#40;Storage&#41;    )
+### 💻 Backend
 
-[//]: # (>Infrastructure : AWS EC2, AWS S3, AWS IAM, AWS Route 53, AWS VPC)
 
-[//]: # ()
-[//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)
+>Language : Java    
 
-[//]: # ()
-[//]: # ()
-[//]: # (## Documentation)
+>Library & Framework : Spring Boot    
 
-[//]: # ()
-[//]: # ()
-[//]: # (- [API 명세서]&#40;https://lead-nautilus-a36.notion.site/API-23beef117713416897a07f7c6d7dacc9?pvs=4&#41;)
+>Database : MySQLDB    
 
-[//]: # (- [레코드온 팀 소개 페이지]&#40;https://lead-nautilus-a36.notion.site/RECORD-ON-eba4522c028348e1a6adce5d9343a8d4?pvs=4&#41;)
+>ORM : JPA     
 
-[//]: # (- [레코드온 서비스 소개 페이지]&#40;https://lead-nautilus-a36.notion.site/RECORD-ON-9688b300cd074a1ca37401ff2272b875&#41;)
+>Deploy: Mysql(Storage)    
 
-[//]: # ()
-[//]: # ()
-[//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)
+>Infrastructure : AWS EC2, AWS Route 53, AWS VPC
 
-[//]: # ()
-[//]: # (<!-- CONTACT -->)
 
-[//]: # (## Team Member)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-[//]: # ()
-[//]: # (|                                                🐣 조예은                                                 |                          🐭 박예람                           |                          🦉 김기영                           |                          🐱 전소명                           |)
 
-[//]: # (|:-----------------------------------------------------------------------------------------------------:|:---------------------------------------------------------:|:---------------------------------------------------------:|:---------------------------------------------------------:|)
 
-[//]: # (|                                                  PM                                                   |                            기획                             |                            백엔드                            |                            백엔드                            |)
+## Documentation
 
-[//]: # (|  <img src="https://github.com/user-attachments/assets/b7e06b6e-94b1-4d1a-aab4-4f2378626b09" style="width: 150px; height: 150px; object-fit: cover;">  |  <img src="https://github.com/user-attachments/assets/a724d87f-9526-480d-89b5-bb0c91187574" style="width: 150px; height: 150px; object-fit: cover;">   | <img src="https://github.com/user-attachments/assets/d0b3d498-5623-461b-b4b4-46863dd450c8" style="width: 150px; height: 150px; object-fit: cover;"> | <img src="https://github.com/user-attachments/assets/67305492-f1cd-4635-b89a-1c7bfcc3769e" style="width: 150px; height: 150px; object-fit: cover;"> |)
 
-[//]: # (|                                                🐰 이윤서                                                 |                          🐹 김예은                           |                          🐨 박주영                           |                          🐶 이민규                           |)
 
-[//]: # (|                                                  디자인                                                  |                           프론트엔드                           |                           프론트엔드                           |                           프론트엔드                           |)
+- [API 명세서](https://citrine-sousaphone-084.notion.site/API-c67b3243e6c24fe8b45c0cb78622ce1d?pvs=4)
 
-[//]: # (| <img src="https://github.com/user-attachments/assets/3b813d08-7315-4801-b2a3-86bc25162654" style="width: 150px; height: 150px; object-fit: cover;"> | <img src="https://github.com/user-attachments/assets/16fa6fd2-385e-4753-a426-1d95718ee386" style="width: 150px; height: 150px; object-fit: cover;"> | <img src="https://github.com/user-attachments/assets/f5d95226-417b-461d-a733-569fa16ebf7b" style="width: 150px; height: 150px; object-fit: cover;"> | <img src="https://github.com/user-attachments/assets/1a217ed7-7955-482d-b120-354ca4ba2dfb" style="width: 150px; height: 150px; object-fit: cover;"> |)
+- [광기 자중해 팀 소개 페이지](https://citrine-sousaphone-084.notion.site/36585565d3f2408aa7f94db628b03f67?pvs=4)
 
-[//]: # ()
-[//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)
 
-[//]: # ()
-[//]: # (<!-- ACKNOWLEDGMENTS -->)
 
-[//]: # (## Acknowledgments)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-[//]: # (* [Best-README-Template]&#40;https://github.com/othneildrew/Best-README-Template/tree/master&#41;)
 
-[//]: # (* [GitHub Emoji Cheat Sheet]&#40;https://gitmoji.dev/&#41;)
+<!-- CONTACT -->
 
-[//]: # ()
-[//]: # (<p align="right">&#40;<a href="#readme-top">back to top</a>&#41;</p>)
+## Team Member
 
-[//]: # ()
-[//]: # ()
-[//]: # (<br>)
 
-[//]: # (<!-- Footer banner -->)
+|                                                                       🐣 이주향                                                                        |                                                                       🐭 김예정                                                                        |                          🦉 김기영                           |                                                                       🐱 김광일                                                                        |
+|:---------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
+|                                                                         PM                                                                          |                                                                         디자인                                                                         |                            백엔드                            |                                                                        프런트엔드                                                                        |
+| <img src="https://github.com/user-attachments/assets/0cb0a3f5-ca61-4548-9cc3-953539e6b531" style="width: 150px; height: 150px; object-fit: cover;"> | <img src="https://github.com/user-attachments/assets/02dbe393-2fc6-4092-8077-91bf20868d8d" style="width: 150px; height: 150px; object-fit: cover;"> | <img src="https://github.com/user-attachments/assets/d0b3d498-5623-461b-b4b4-46863dd450c8" style="width: 150px; height: 150px; object-fit: cover;"> | <img src="https://github.com/user-attachments/assets/2c5bf7ad-e880-4520-9819-fe4a293d5073" style="width: 150px; height: 150px; object-fit: cover;"> |
+|                                                                       🐰 권채은                                                                        |
+|                                                                        프런트엔드                                                                        |
+| <img src="https://github.com/user-attachments/assets/4a5a11e4-c79b-440b-a764-d937fcf2015c" style="width: 150px; height: 150px; object-fit: cover;"> |
 
-[//]: # (<img src="https://capsule-render.vercel.app/api?type=rect&color=0:5eb592,10:93d9bd,30:5eb592,75:2f8f67,100:136342&height=40&section=footer&text=&fontSize=0" width="100%"/>)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template/tree/master)
+
+* [GitHub Emoji Cheat Sheet](https://gitmoji.dev/)
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<br>
+
+<!-- Footer banner -->
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:C40C0C,10:F73E09FF,30:FF6500,75:ffaa00,100:FF8A08&height=40&section=footer&text=&fontSize=0" width="100%"/>

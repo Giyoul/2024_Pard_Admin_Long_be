@@ -13,7 +13,7 @@ public class BloodDonationResponseDTO {
         private String donation_user_name;
         private Date donation_date;
         private String donation_location;
-        private String donation_type;
+        private Integer donation_type;
 
         public BloodDonationInfo(BloodDonation bloodDonation) {
             this.donation_user_name = bloodDonation.getUser().getName();

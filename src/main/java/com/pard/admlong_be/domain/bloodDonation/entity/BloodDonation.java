@@ -26,7 +26,7 @@ public class BloodDonation {
 
     private Date donation_date;
     private String donation_location;
-    private String donation_type;
+    private Integer donation_type;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -37,7 +37,7 @@ public class BloodDonation {
     @JsonIgnore // 순환 참조 방지
     private List<ChallengeDonationRelation> challengeDonationRelationList;
 
-    public BloodDonation(Date donation_date, String donation_location, String donation_type, User user) {
+    public BloodDonation(Date donation_date, String donation_location, Integer donation_type, User user) {
         this.donation_date = donation_date;
         this.donation_location = donation_location;
         this.donation_type = donation_type;

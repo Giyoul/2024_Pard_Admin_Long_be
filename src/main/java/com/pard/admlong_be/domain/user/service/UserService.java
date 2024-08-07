@@ -19,10 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -97,9 +94,9 @@ public class UserService {
             if (!userRepository.existsByEmail(jwtUtil.getEmail(token))) {
                 throw new ProjectException.UserNotExistException("없는 유저입니다.");
             }
-            Date lastDonationDate = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(()
-                    -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."))
-                    .getLast_donation_date();
+            User user = userRepository.findByEmail(jwtUtil.getEmail(token)).orElseThrow(()
+                    -> new ProjectException.UserNotFoundException("해당 유저는 존재하나, Repository에서 불러오는 과정에서 문제가 발생했습니다."));
+            Date lastDonationDate = user.getLast_donation_date();
             // 현재 날짜 가져오기
             LocalDate currentDate = LocalDate.now();
             // java.util.Date를 java.time.LocalDate로 변환
@@ -108,6 +105,27 @@ public class UserService {
                     .toLocalDate();
             // 두 날짜 간의 차이 계산
             long daysBetween = ChronoUnit.DAYS.between(lastDonationLocalDate, currentDate);
+
+            Integer donation_type = null;
+            if (user.getBloodDonationList() != null && !user.getBloodDonationList().isEmpty()) {
+                donation_type = user.getBloodDonationList()
+                        .get(user.getBloodDonationList().size() - 1)
+                        .getDonation_type();
+            } else {
+                // 리스트가 비어있거나 null일 경우의 처리
+                // 예: donation_type을 기본값으로 설정하거나 다른 처리를 할 수 있습니다.
+                // donation_type = 0; // 기본값으로 설정 (필요에 따라 설정)
+                return new ResponseDTO(true, "헌혈 내역이 없습니다.");
+            }
+            if (donation_type == 0) {
+                daysBetween = 62-daysBetween;
+            }
+            if (donation_type == 1) {
+                daysBetween = 14-daysBetween;
+            }
+            if (donation_type == 2) {
+                daysBetween = 14-daysBetween;
+            }
             // 이전 헌혈일로부터 지난 시간입니다.
             return new ResponseDTO(true, "이전 헌혈 불러오는데 성공했습니다.", new UserResponseDTO.GetDueDateResponseDTO(daysBetween));
         } catch (ProjectException.UserNotFoundException e) {

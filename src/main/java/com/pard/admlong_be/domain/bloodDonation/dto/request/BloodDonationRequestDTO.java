@@ -13,6 +13,6 @@ public class BloodDonationRequestDTO {
     public static class BloodDonationCertifyRequestDTO {
         private Date donation_date;
         private String donation_location;
-        private String donation_type;
+        private Integer donation_type;
     }
 }

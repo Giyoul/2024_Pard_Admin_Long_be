@@ -36,7 +36,7 @@ public class BloodDonationService {
                 challengeDonationRelationRepository.save(challengeDonationRelation);
             }
             user.addBloodDonation(bloodDonation);
-            userRepository.save(user);
+            user.addLastDonationDate(requestDTO.getDonation_date());
             bloodDonationRepository.save(bloodDonation);
             return new ResponseDTO(true, "bloodDonation successfully.");
         } catch (ProjectException.UserNotExistException e) {

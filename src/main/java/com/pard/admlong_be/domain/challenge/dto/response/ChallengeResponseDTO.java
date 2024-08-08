@@ -36,6 +36,34 @@ public class ChallengeResponseDTO {
 
     @Getter
     @Setter
+    public static class FindChallengeResponse {
+        private Long challenge_id;
+        private String challenge_name;
+        private Date challenge_start_date;
+        private Date challenge_end_date;
+        private String challenge_age;
+        private String challenge_description;
+        private String challenge_org;
+        private Integer challenge_gender;
+        private Boolean challenge_finished;
+        private Long user_count;
+
+        public FindChallengeResponse(Challenge challenge) {
+            this.challenge_id = challenge.getChallenge_id();
+            this.challenge_name = challenge.getChallenge_name();
+            this.challenge_start_date = challenge.getChallenge_start_date();
+            this.challenge_end_date = challenge.getChallenge_end_date();
+            this.challenge_age = challenge.getChallenge_age();
+            this.challenge_description = challenge.getChallenge_description();
+            this.challenge_org = challenge.getChallenge_org();
+            this.challenge_gender = challenge.getChallenge_gender();
+            this.challenge_finished = challenge.getChallenge_finished();
+            this.user_count = (long) challenge.getUserChallengeRelationList().size();
+        }
+    }
+
+    @Getter
+    @Setter
     public static class FindChallengeBdIdResponse {
         private Long challenge_id;
         private Boolean challenge_user_joined;
@@ -79,6 +107,7 @@ public class ChallengeResponseDTO {
         private String challenge_org;
         private Integer challenge_like_count;
         private Integer challenge_gender;
+        private Integer user_count;
         private List<BloodDonationResponseDTO.BloodDonationInfo> blood_donation;
 
         public FindAllChallengeByUserResponse(Challenge challenge) {
@@ -91,6 +120,7 @@ public class ChallengeResponseDTO {
             this.challenge_org = challenge.getChallenge_org();
             this.challenge_like_count = challenge.getChallengeLikeList().size();
             this.challenge_gender = challenge.getChallenge_gender();
+            this.user_count = (Integer) challenge.getUserChallengeRelationList().size();
             this.blood_donation = challenge.getChallengeDonationRelationList().stream()
                     .map(challengeDonationRelation -> new BloodDonationResponseDTO.BloodDonationInfo(challengeDonationRelation.getBloodDonation())).toList();
         }

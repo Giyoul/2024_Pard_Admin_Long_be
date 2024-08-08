@@ -56,4 +56,8 @@ public class User {
     public void addBloodDonation(BloodDonation bloodDonation) {
         bloodDonationList.add(bloodDonation);
     }
+
+    public void addLastDonationDate(Date lastDonationDate) {
+        this.last_donation_date = lastDonationDate;
+    }
 }

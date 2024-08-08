@@ -20,10 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -91,7 +88,8 @@ public class ChallengeService {
         try {
             List<Challenge> challengeList = challengeRepository.findChallengesByFinished(request);
             Collections.reverse(challengeList);
-            return new ResponseDTO(true, "Successfully fetched challenge information", challengeList);
+            List<ChallengeResponseDTO.FindChallengeResponse> responseList = challengeList.stream().map(ChallengeResponseDTO.FindChallengeResponse::new).toList();
+            return new ResponseDTO(true, "Successfully fetched challenge information", responseList);
         } catch (Exception e) {
             return new ResponseDTO(false, e.getMessage());
         }

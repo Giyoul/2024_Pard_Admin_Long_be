@@ -5,6 +5,7 @@ import com.pard.admlong_be.domain.challenge.entity.Challenge;
 import com.pard.admlong_be.domain.challengeDonationRelation.entity.ChallengeDonationRelation;
 import com.pard.admlong_be.domain.user.entity.User;
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
